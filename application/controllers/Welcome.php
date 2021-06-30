@@ -227,7 +227,7 @@ class Welcome extends CI_Controller
 					'sexo'  => $row->sexo
 				);
 				$this->session->set_userdata($arraydata);
-				redirect('/admon');
+				redirect('/Socios');
 			}
 		} else {
 			$breadcrumb         = array(
