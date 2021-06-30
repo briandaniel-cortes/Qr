@@ -108,11 +108,10 @@ class Usuarios extends CI_Controller
 			$this->load->view('Visitas/usuario/alertano.php');
 			$this->load->view('Componentes/Footer');
 		}else{
-			echo"no ahi nada malo";
+			echo"no ahi nada malos";
 		}
 		
 	}
-
 
 
 	public function Locales($tipo = 0)
