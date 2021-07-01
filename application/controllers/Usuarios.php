@@ -148,7 +148,7 @@ class Usuarios extends CI_Controller
 			$data['localeslista'] = $this->Local->localeslista1($tipo);
 		}
 		$this->load->view('Componentes/Headerd', $data);
-		$this->load->view('Visitas/Local');
+		$this->load->view('Visitas/usuario/Local');
 		$this->load->view('Componentes/Footer');
 	}
 
@@ -164,7 +164,7 @@ class Usuarios extends CI_Controller
 		$data['tags'] = $this->Local->tags();
 		$data['localfetalle'] = $this->Local->localfetalle($id);
 		$this->load->view('Componentes/Headerd', $data);
-		$this->load->view('Visitas/localdetalles');
+		$this->load->view('Visitas/usuario/localdetalles');
 		$this->load->view('Componentes/Footer');
 	}
 
