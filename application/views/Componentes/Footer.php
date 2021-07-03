@@ -276,7 +276,10 @@ color:white;
       background-image: url("https://qrtourproyecto.000webhostapp.com/imagenes/fondos.png");
       background-attachment: fixed;
     }
-
+    .cambio3 {
+      background-image: url("https://qrtourproyecto.000webhostapp.com/imagenes/agregar.png");
+      background-attachment: fixed;
+    }
     .color {
       background-color: rgb(252, 232, 167)
     }
