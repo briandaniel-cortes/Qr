@@ -266,3 +266,39 @@ color:white;
 
 
 </style>
+<style>
+    .cambio {
+      background-image: url("https://qrtourproyecto.000webhostapp.com/imagenes/local2.png");
+      background-attachment: fixed;
+    }
+
+    .cambio2 {
+      background-image: url("https://qrtourproyecto.000webhostapp.com/imagenes/fondos.png");
+      background-attachment: fixed;
+    }
+
+    .color {
+      background-color: rgb(252, 232, 167)
+    }
+
+    .foto {
+      width: 50%;
+    }
+
+    .tam {
+      font-size: 300%;
+    }
+
+    .texto-encima {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .centrado {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>

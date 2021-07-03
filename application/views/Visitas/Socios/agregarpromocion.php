@@ -1,6 +1,6 @@
 <br>
 <br><br><br><br>
-<center><div class="container trasparente pequeño text-center">
+<center><div class="container cambio2 pequeño text-center">
 <img class="img-fluid login" src="<?php echo ruta; ?>assets/Imagenes//SitioWeb/login.png" alt="">
     <form class="needs-validation" novalidate method="POST" action="<?php echo ruta; ?>/Welcome/registrar">
         <div class="form-row">
@@ -76,19 +76,7 @@
 
                 <select class="custom-select" id="validationTooltip04" name="preciodescuento" required>
                     <option selected disabled value="">Choose...</option>
-                    <?php if ($sexo) : ?>
-                        <?php
-                        foreach ($sexo->result() as $worker) {
-                        ?>
-                            <option value="<?= $worker->id ?>"><?= $worker->sexo ?></option>
-                        <?php } ?>
-                    <?php else : ?>
-                        <tr>
-                            <td colspan="10">
-                                <center>No existen registros</center>
-                            </td>
-                        </tr>
-                    <?php endif ?>
+                 
                 </select>
 
                 <div class="valid-tooltip">
