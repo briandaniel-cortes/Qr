@@ -21,19 +21,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo ruta; ?>Welcome/">Inicio <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo ruta; ?>Socios/">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo ruta; ?>Welcome/nosotros">Nosotros <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo ruta; ?>Socios/nosotros">Nosotros <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo ruta; ?>Welcome/socio">Locales<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo ruta; ?>Socios/socio">Locales<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo ruta; ?>Welcome/Promociones">Promociones<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo ruta; ?>Socios/Promociones">Promociones<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo ruta; ?>Welcome/Locales">Locales<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="<?php echo ruta; ?>Socios/miperfil">Mi Perfil<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo ruta; ?>Socios/foro">Foro<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -42,10 +45,10 @@
             </form>
             <ul class="navbar-nav ">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo ruta; ?>Welcome/login">Iniciar Sesion</a>
+                    <a class="nav-link" href="<?php echo ruta; ?>Socios/login">Iniciar Sesion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo ruta; ?>Welcome/contactanos">Contactanos</a>
+                    <a class="nav-link" href="<?php echo ruta; ?>Socios/contactanos">Contactanos</a>
                 </li>
             </ul>
         </div>

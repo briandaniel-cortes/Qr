@@ -24,5 +24,20 @@ class Socio extends CI_Model
         }
         return false;
     }
-    
+    public function vermislocales($id){
+        $query = $this->db->query("CALL sociolocal($id)");
+        if($query->num_rows()>0){            
+           return $query;            
+       }else{
+           return false;
+       } 
+    }
+    public function vermispromociones($id){
+        $query = $this->db->query("CALL promocionesosicio($id)");
+        if($query->num_rows()>0){            
+           return $query;            
+       }else{
+           return false;
+       } 
+    }
 }
