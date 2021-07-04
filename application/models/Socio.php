@@ -40,4 +40,12 @@ class Socio extends CI_Model
            return false;
        } 
     }
+    public function verlcoalesdelosocios($id){
+        $query = $this->db->query("CALL localesusuariosocio($id)");
+        if($query->num_rows()>0){            
+           return $query;            
+       }else{
+           return false;
+       } 
+    }
 }
