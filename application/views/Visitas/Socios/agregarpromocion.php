@@ -125,4 +125,3 @@
         </form>
     </div>
 </center>
-<?php echo $error;?>

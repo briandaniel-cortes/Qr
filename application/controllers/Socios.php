@@ -87,6 +87,7 @@ class Socios extends CI_Controller
 		$breadcrumb         = array(
 			"Inicio" => "/qrtour/public",
 			"Promociones" => "/qrtour/public",
+			"Editar" => "/qrtour/public",
 		);
 		$data['breadcrumb'] = $breadcrumb;
 
@@ -120,8 +121,8 @@ class Socios extends CI_Controller
 				'preciodescuento' => strip_tags($this->input->post('preciodescuento')),
 				'fotopromo' => $files
 			);
-			$idpromo =strip_tags($this->input->post('idpromo'));
-			$update = $this->Promociones->update($idpromo,$userData);
+			$idpromo = strip_tags($this->input->post('idpromo'));
+			$update = $this->Promociones->update($idpromo, $userData);
 			if ($update) {
 				redirect('./Socios/promociones');
 			} else {
@@ -130,26 +131,53 @@ class Socios extends CI_Controller
 		} else {
 
 			$files = $capeta . '/' . $file;
-			
-		
-		$userData = array(
-			'promo' => strip_tags($this->input->post('promo')),
-			'descripcion' => strip_tags($this->input->post('descripcion')),
-			'fechainicio' => strip_tags($this->input->post('fechainicio')),
-			'fechafinal' => strip_tags($this->input->post('fechafinal')),
-			'locale' => $ids,
-			'preciofijo' => strip_tags($this->input->post('preciofijo')),
-			'preciodescuento' => strip_tags($this->input->post('preciodescuento')),
-			'fotopromo' => $files
-		);
-		$idpromo =strip_tags($this->input->post('idpromo'));
-		$update = $this->Promociones->update($idpromo,$userData);
-		if ($update) {
-			redirect('./Socios/promociones');
-		} else {
-			redirect('./Socios/promociones');
+
+
+			$userData = array(
+				'promo' => strip_tags($this->input->post('promo')),
+				'descripcion' => strip_tags($this->input->post('descripcion')),
+				'fechainicio' => strip_tags($this->input->post('fechainicio')),
+				'fechafinal' => strip_tags($this->input->post('fechafinal')),
+				'locale' => $ids,
+				'preciofijo' => strip_tags($this->input->post('preciofijo')),
+				'preciodescuento' => strip_tags($this->input->post('preciodescuento')),
+				'fotopromo' => $files
+			);
+			$idpromo = strip_tags($this->input->post('idpromo'));
+			$update = $this->Promociones->update($idpromo, $userData);
+			if ($update) {
+				redirect('./Socios/promociones');
+			} else {
+				redirect('./Socios/promociones');
+			}
 		}
 	}
+	public function eliminarpromo()
+	{
+
+		$breadcrumb         = array(
+			"Inicio" => "/qrtour/public",
+			"Promociones" => "/qrtour/public",
+		);
+		$data['breadcrumb'] = $breadcrumb;
+		$idpromo = strip_tags($this->input->post('idpromo'));
+		$promo = $this->Promociones->delete($idpromo);
+		if ($promo) {
+	
+			redirect('./Socios/promociones');	
+		} else {
+			$id = $this->session->id;
+			$breadcrumb         = array(
+				"Inicio" => "/qrtour/public",
+				"Promociones" => "/qrtour/public",
+			);
+			$data['breadcrumb'] = $breadcrumb;
+			$data['Promociones'] = $this->Socio->vermispromociones($id);
+			$this->load->view('Componentes/Headersocio', $data);
+			$this->load->view('Visitas/Socios/eliminarpromocion');
+			$this->load->view('Visitas/Socios/mispromos');
+			$this->load->view('Componentes/Footer');
+		}
 	}
 	public function agregarpromociones()
 	{
@@ -157,6 +185,7 @@ class Socios extends CI_Controller
 		$breadcrumb         = array(
 			"Inicio" => "/qrtour/public",
 			"Promociones" => "/qrtour/public",
+			"Agregar" => "/qrtour/public",
 		);
 		$data['breadcrumb'] = $breadcrumb;
 

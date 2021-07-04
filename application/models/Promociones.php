@@ -31,7 +31,12 @@ class Promociones extends CI_Model
         }
         return false;
     }
-    
+    public function delete($id)
+    {
+            $this->db->where('id', $id);
+            $this->db->delete($this->table);
+        return false;
+    }
     public function verunapromacion($id)
     {
         $query = $this->db->query("SELECT * FROM promociones WHERE promociones.`id`=$id");
