@@ -14,7 +14,8 @@ class Socios extends CI_Controller
 		$this->load->model('Socio');
 		$this->load->model('Local');
 		$this->load->library('session');
-		$this->load->helper('url');
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('ftp');
 	}
 
 	public function index()
@@ -48,7 +49,7 @@ class Socios extends CI_Controller
 		);
 		$id = $this->session->id;
 		$data['breadcrumb'] = $breadcrumb;
-		$data['vermislocales'] = $this->Socio->vermislocales($id); 
+		$data['vermislocales'] = $this->Socio->vermislocales($id);
 		$this->load->view('Componentes/Headersocio', $data);
 		$this->load->view('Visitas/Socios/localvista');
 		$this->load->view('Visitas/Socios/comosubir');
@@ -75,9 +76,80 @@ class Socios extends CI_Controller
 		$data['breadcrumb'] = $breadcrumb;
 		$data['Promociones'] = $this->Socio->vermispromociones($id);
 		$this->load->view('Componentes/Headersocio', $data);
-		
+
 		$this->load->view('Visitas/Socios/mispromos');
 		$this->load->view('Componentes/Footer');
+	}
+	public function editarpromociones()
+	{
+		$id =  strip_tags($this->input->post('localid'));
+
+		$breadcrumb         = array(
+			"Inicio" => "/qrtour/public",
+			"Promociones" => "/qrtour/public",
+		);
+		$data['breadcrumb'] = $breadcrumb;
+
+		$data['promo'] = $this->Promociones->verunapromacion($id);
+
+		$this->load->view('Componentes/Headersocio', $data);
+		$this->load->view('Visitas/Socios/editarpromociones');
+		$this->load->view('Componentes/Footer');
+	}
+	public function editpromo()
+	{
+		$ids = strip_tags($this->input->post('local'));
+
+		$query = $this->db->query("SELECT * FROM locales WHERE locales.`id`= $ids");
+		$row = $query->row();
+		$capeta = $row->nombrelocal;
+		$file = $_FILES['userfile']['name'];
+		$config['upload_path'] = 'assets/Imagenes/locales/' . $capeta;
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = 4000;
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload('userfile')) {
+			$files = strip_tags($this->input->post('recuperado'));
+			$userData = array(
+				'promo' => strip_tags($this->input->post('promo')),
+				'descripcion' => strip_tags($this->input->post('descripcion')),
+				'fechainicio' => strip_tags($this->input->post('fechainicio')),
+				'fechafinal' => strip_tags($this->input->post('fechafinal')),
+				'locale' => $ids,
+				'preciofijo' => strip_tags($this->input->post('preciofijo')),
+				'preciodescuento' => strip_tags($this->input->post('preciodescuento')),
+				'fotopromo' => $files
+			);
+			$idpromo =strip_tags($this->input->post('idpromo'));
+			$update = $this->Promociones->update($idpromo,$userData);
+			if ($update) {
+				redirect('./Socios/promociones');
+			} else {
+				redirect('./Socios/promociones');
+			}
+		} else {
+
+			$files = $capeta . '/' . $file;
+			
+		
+		$userData = array(
+			'promo' => strip_tags($this->input->post('promo')),
+			'descripcion' => strip_tags($this->input->post('descripcion')),
+			'fechainicio' => strip_tags($this->input->post('fechainicio')),
+			'fechafinal' => strip_tags($this->input->post('fechafinal')),
+			'locale' => $ids,
+			'preciofijo' => strip_tags($this->input->post('preciofijo')),
+			'preciodescuento' => strip_tags($this->input->post('preciodescuento')),
+			'fotopromo' => $files
+		);
+		$idpromo =strip_tags($this->input->post('idpromo'));
+		$update = $this->Promociones->update($idpromo,$userData);
+		if ($update) {
+			redirect('./Socios/promociones');
+		} else {
+			redirect('./Socios/promociones');
+		}
+	}
 	}
 	public function agregarpromociones()
 	{
@@ -87,9 +159,53 @@ class Socios extends CI_Controller
 			"Promociones" => "/qrtour/public",
 		);
 		$data['breadcrumb'] = $breadcrumb;
+
+		$data['promo'] = $this->Socio->verlcoalesdelosocios($id);
 		$this->load->view('Componentes/Headersocio', $data);
 		$this->load->view('Visitas/Socios/agregarpromocion');
 		$this->load->view('Componentes/Footer');
+	}
+	public function registrarpromo()
+	{
+		$id = strip_tags($this->input->post('locale'));
+
+		$query = $this->db->query("SELECT * FROM locales WHERE locales.`id`=$id");
+		$row = $query->row();
+		$capeta = $row->nombrelocal;
+		$target_dir = "./assets/Imagenes/locales/" . $capeta;
+		if (!file_exists($target_dir)) {
+			mkdir($target_dir, 0777, TRUE);
+		}
+		$file = $_FILES['userfile']['name'];
+		$config['upload_path']          = 'assets/Imagenes/locales/' . $capeta;
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 4000;
+		$this->load->library('upload', $config);
+		if (!$this->upload->do_upload('userfile')) {
+			$error = array('error' => $this->upload->display_errors());
+			$this->load->view('Visitas/Socios/prueba', $error);
+		} else {
+			$data = array('upload_data' => $this->upload->data());
+			$this->load->view('Visitas/Socios/prueba', $data);
+
+			$userData = array(
+				'promo' => strip_tags($this->input->post('promo')),
+				'descripcion' => strip_tags($this->input->post('descripcion')),
+				'fechainicio' => strip_tags($this->input->post('fechainicio')),
+				'fechafinal' => strip_tags($this->input->post('fechafinal')),
+				'locale' => strip_tags($this->input->post('locale')),
+				'preciofijo' => strip_tags($this->input->post('preciofijo')),
+				'preciodescuento' => strip_tags($this->input->post('preciodescuento')),
+				'fotopromo' => $capeta . '/' . $file
+			);
+			echo $file;
+			$insert = $this->Promociones->insert($userData);
+			if ($insert) {
+				redirect('./Socios/promociones');
+			} else {
+				redirect('./Socios/promociones');
+			}
+		}
 	}
 
 	public function registrasocio()
@@ -120,7 +236,7 @@ class Socios extends CI_Controller
 
 			$correo = strip_tags($this->input->post('correo'));
 			$Contrasena = strip_tags($this->input->post('contrasena'));
-			
+
 			$existeusuario = $this->Usuario->validarentrada($correo, $Contrasena);
 			if ($existeusuario) {
 				$insert = $this->Socio->insert($userData);
@@ -128,7 +244,7 @@ class Socios extends CI_Controller
 					$query = $this->db->query("UPDATE usuario SET tipo = 2 WHERE `id` = $id;");
 					$this->session->sess_destroy();
 					redirect('/Welcome');
-				}else{
+				} else {
 					redirect('/Usuarios/sesocio	');
 				}
 			} else {

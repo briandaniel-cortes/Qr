@@ -4,7 +4,7 @@
     <h1 class="text-dark">Tus Promociones </h1>
     <br><br>
     <div class="cambio2">
-    <h1 class="text-dark"><a href="<?php echo ruta; ?>/Socios/agregarpromociones" class="btn btn-info">Agregar Promocion</a></h1>
+      <h1 class="text-dark"><a href="<?php echo ruta; ?>/Socios/agregarpromociones" class="btn btn-info">Agregar Promocion</a></h1>
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -29,11 +29,41 @@
                 <td><?= $worker->descripcion ?></td>
                 <td>de <?= $worker->fechainicio ?> a <?= $worker->fechafinal ?></td>
                 <td><?= $worker->nombrelocal ?></td>
-                <td><?= $worker->preciofijo ?></td>                
+                <td><?= $datss = $worker->preciofijo ?></td>
                 <td><?= $worker->preciodescuento ?></td>
                 <td><?= $worker->fotopromo ?></td>
-                <td><?= $worker->preciofijo - $worker->preciodescuento ?></td>
-                <td><h2><center><a href="" class="btn btn-danger">Eliminar</a>  <a href="" class="btn btn-success">Actualizar</a></center></h2></td>
+                <td><?= $datoss = $worker->preciofijo - $worker->preciodescuento ?></td>
+                <?php
+                if ($datoss <= 0) {
+                ?>
+                  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+                  <script>
+                    window.addEventListener('load', ups, false);
+
+                    function ups() {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'ahi un problema, una de tus promociones tiene numero negativos porfavor revisalo y cambialo cuanto antes',
+
+                      })
+                    }
+                  </script>
+                <?php
+                }
+                ?>
+                <td>
+                  <h2>
+                    <center><a href="" class="btn btn-danger">Eliminar</a>
+                      <form action="<?php echo ruta; ?>/Socios/editarpromociones" method="POST">
+                        <input type="hidden" name="localid" value="<?= $worker->id ?>">
+
+                        <button type="submit" class="btn btn-success">Actualizar</button>
+
+                      </form>
+                  </h2>
+                </td>
               </tr>
             <?php } ?>
           <?php else : ?>
@@ -50,7 +80,3 @@
     </div>
     <br><br><br><br>
   </center>
-
-
-
-
