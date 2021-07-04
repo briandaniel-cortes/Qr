@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Usuarios extends CI_Controller
+class Socios extends CI_Controller
 {
 	function __construct()
 	{
@@ -24,7 +24,7 @@ class Usuarios extends CI_Controller
 		);
 		$data['breadcrumb'] = $breadcrumb;
 		$data['sliderpublico'] = $this->Sliderpublico->verislider();
-		$this->load->view('Componentes/Headerd', $data);
+		$this->load->view('Componentes/Headersocio', $data);
 		$this->load->view('Visitas/usuario/InicioUsuario');
 		$this->load->view('Componentes/Footer');
 	}
@@ -36,7 +36,7 @@ class Usuarios extends CI_Controller
 		);
 		$data['breadcrumb'] = $breadcrumb;
 		$data['sliderpublico'] = $this->Sliderpublico->verislider();
-		$this->load->view('Componentes/Headerd', $data);
+		$this->load->view('Componentes/Headersocio', $data);
 		$this->load->view('Visitas/nosotros');
 		$this->load->view('Componentes/Footer');
 	}
@@ -46,9 +46,12 @@ class Usuarios extends CI_Controller
 			"Inicio" => "/qrtour/public",
 			"Socios" => "/qrtour/public",
 		);
+		$id = $this->session->id;
 		$data['breadcrumb'] = $breadcrumb;
-		$this->load->view('Componentes/Headerd', $data);
-		$this->load->view('Visitas/socio');
+		$data['vermislocales'] = $this->Socio->vermislocales($id); 
+		$this->load->view('Componentes/Headersocio', $data);
+		$this->load->view('Visitas/Socios/localvista');
+		$this->load->view('Visitas/Socios/comosubir');
 		$this->load->view('Componentes/Footer');
 	}
 	public function sesocio()
@@ -58,34 +61,37 @@ class Usuarios extends CI_Controller
 			"Socios" => "/qrtour/public",
 		);
 		$data['breadcrumb'] = $breadcrumb;
-		$this->load->view('Componentes/Headerd', $data);
+		$this->load->view('Componentes/Headersocio', $data);
 		$this->load->view('Visitas/usuario/seunsocio');
 		$this->load->view('Componentes/Footer');
 	}
 	public function promociones()
 	{
+		$id = $this->session->id;
 		$breadcrumb         = array(
 			"Inicio" => "/qrtour/public",
 			"Promociones" => "/qrtour/public",
 		);
 		$data['breadcrumb'] = $breadcrumb;
-		$data['Promociones'] = $this->Promociones->Promociones();
-		$this->load->view('Componentes/Headerd', $data);
-		$this->load->view('Visitas/promo');
+		$data['Promociones'] = $this->Socio->vermispromociones($id);
+		$this->load->view('Componentes/Headersocio', $data);
+		
+		$this->load->view('Visitas/Socios/mispromos');
 		$this->load->view('Componentes/Footer');
 	}
-	public function tienda()
+	public function agregarpromociones()
 	{
+		$id = $this->session->id;
 		$breadcrumb         = array(
 			"Inicio" => "/qrtour/public",
-			"Tienda" => "/qrtour/public",
+			"Promociones" => "/qrtour/public",
 		);
 		$data['breadcrumb'] = $breadcrumb;
-		$data['Promociones'] = $this->Promociones->Promociones();
-		$this->load->view('Componentes/Headerd', $data);
-		$this->load->view('Visitas/promo');
+		$this->load->view('Componentes/Headersocio', $data);
+		$this->load->view('Visitas/Socios/agregarpromocion');
 		$this->load->view('Componentes/Footer');
 	}
+
 	public function registrasocio()
 	{
 
@@ -99,7 +105,7 @@ class Usuarios extends CI_Controller
 				"Socios" => "/qrtour/public",
 			);
 			$data['breadcrumb'] = $breadcrumb;
-			$this->load->view('Componentes/Headerd', $data);
+			$this->load->view('Componentes/Headersocio', $data);
 			$this->load->view('Visitas/usuario/alertano.php');
 			$this->load->view('Componentes/Footer');
 		} else {
@@ -147,8 +153,8 @@ class Usuarios extends CI_Controller
 		} else {
 			$data['localeslista'] = $this->Local->localeslista1($tipo);
 		}
-		$this->load->view('Componentes/Headerd', $data);
-		$this->load->view('Visitas/usuario/Local');
+		$this->load->view('Componentes/Headersocio', $data);
+		$this->load->view('Visitas/Local');
 		$this->load->view('Componentes/Footer');
 	}
 
@@ -163,8 +169,8 @@ class Usuarios extends CI_Controller
 		$data['breadcrumb'] = $breadcrumb;
 		$data['tags'] = $this->Local->tags();
 		$data['localfetalle'] = $this->Local->localfetalle($id);
-		$this->load->view('Componentes/Headerd', $data);
-		$this->load->view('Visitas/usuario/localdetalles');
+		$this->load->view('Componentes/Headersocio', $data);
+		$this->load->view('Visitas/localdetalles');
 		$this->load->view('Componentes/Footer');
 	}
 
