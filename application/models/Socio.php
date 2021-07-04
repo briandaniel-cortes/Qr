@@ -10,8 +10,8 @@ class Socio extends CI_Model
         $this->table = 'socio';
         $this->id = 'id';
     }
-   
-   
+
+
     public function insert($data = array())
     {
         if (!empty($data)) {
@@ -24,28 +24,31 @@ class Socio extends CI_Model
         }
         return false;
     }
-    public function vermislocales($id){
+    public function vermislocales($id)
+    {
         $query = $this->db->query("CALL sociolocal($id)");
-        if($query->num_rows()>0){            
-           return $query;            
-       }else{
-           return false;
-       } 
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
     }
-    public function vermispromociones($id){
+    public function vermispromociones($id)
+    {
         $query = $this->db->query("CALL promocionesosicio($id)");
-        if($query->num_rows()>0){            
-           return $query;            
-       }else{
-           return false;
-       } 
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
     }
-    public function verlcoalesdelosocios($id){
+    public function verlcoalesdelosocios($id)
+    {
         $query = $this->db->query("CALL localesusuariosocio($id)");
-        if($query->num_rows()>0){            
-           return $query;            
-       }else{
-           return false;
-       } 
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
     }
 }
