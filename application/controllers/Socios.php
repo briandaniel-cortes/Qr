@@ -334,7 +334,12 @@ class Socios extends CI_Controller
 		$this->load->view('Componentes/Footer');
 	}
 
+	function logout()
+    {
 
+        $this->session->sess_destroy();
+        redirect('../');
+    }
 
 	public function contactanos()
 	{
