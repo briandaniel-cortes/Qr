@@ -51,4 +51,14 @@ class Socio extends CI_Model
             return false;
         }
     }
+    public function perfil($id)
+    {
+        $query = $this->db->query("CALL perfil($id)");
+        if ($query->num_rows() > 0) {
+            return $query;
+        } else {
+            return false;
+        }
+    }
+    
 }

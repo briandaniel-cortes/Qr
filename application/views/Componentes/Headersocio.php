@@ -45,7 +45,7 @@
             </form>
             <ul class="navbar-nav ">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo ruta; ?>Socios/login">Iniciar Sesion</a>
+                    <a class="nav-link" href="<?php echo ruta; ?>Socios/login">Cerrar Sesion</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo ruta; ?>Socios/contactanos">Contactanos</a>
