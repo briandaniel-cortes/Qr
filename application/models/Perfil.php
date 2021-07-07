@@ -11,13 +11,6 @@ class Perfil extends CI_Model
         $this->id = 'id';
      
     }
-    public function vermiperfil($id){
-        $query = $this->db->query("CALL sociolocal($id)");
-        if($query->num_rows()>0){            
-           return $query;            
-       }else{
-           return false;
-       } 
-    }
+
    
 }

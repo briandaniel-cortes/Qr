@@ -81,16 +81,10 @@ class Socios extends CI_Controller
 		$this->load->view('Componentes/Footer');
 	}
 
-	public function miperfil()
+	public function perfil()
 	{
-		$id = $this->session->id;
-		$breadcrumb         = array(
-			"Inicio" => "/qrtour/public",
-			"Perfil" => "/qrtour/public",
-		);
-		$data['breadcrumb'] = $breadcrumb;
-		$data['Perfil'] = $this->Socio->vermiperfil($id);
-		$this->load->view('Componentes/Headersocio', $data);
+		$data['Perfil'] = $this->Perfil->vermiperfil($id);
+		$this->load->view('Componentes/Headersocio',$data);
 		
 		$this->load->view('Visitas/Socios/miperfil');
 		$this->load->view('Componentes/Footer');
