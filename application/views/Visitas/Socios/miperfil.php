@@ -1,3 +1,3 @@
 <center>
-<h1>Mi perfil</h1>
+<h1>Estamos en mi perfil</h1>
 </center>
