@@ -83,9 +83,7 @@ class Socios extends CI_Controller
 
 	public function perfil()
 	{
-		$data['Perfil'] = $this->Perfil->vermiperfil($id);
-		$this->load->view('Componentes/Headersocio',$data);
-		
+		$this->load->view('Compoentes/Headersocio');
 		$this->load->view('Visitas/Socios/miperfil');
 		$this->load->view('Componentes/Footer');
 	}
