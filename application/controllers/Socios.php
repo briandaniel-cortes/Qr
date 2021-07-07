@@ -12,6 +12,7 @@ class Socios extends CI_Controller
 		$this->load->model('Usuario');
 		$this->load->model('Sexo');
 		$this->load->model('Socio');
+		$this->load->model('Perfil');
 		$this->load->model('Local');
 		$this->load->library('session');
 		$this->load->helper('url');
@@ -79,6 +80,22 @@ class Socios extends CI_Controller
 		$this->load->view('Visitas/Socios/mispromos');
 		$this->load->view('Componentes/Footer');
 	}
+
+	public function miperfil()
+	{
+		$id = $this->session->id;
+		$breadcrumb         = array(
+			"Inicio" => "/qrtour/public",
+			"Perfil" => "/qrtour/public",
+		);
+		$data['breadcrumb'] = $breadcrumb;
+		$data['Perfil'] = $this->Socio->vermiperfil($id);
+		$this->load->view('Componentes/Headersocio', $data);
+		
+		$this->load->view('Visitas/Socios/miperfil');
+		$this->load->view('Componentes/Footer');
+	}
+
 	public function agregarpromociones()
 	{
 		$id = $this->session->id;
