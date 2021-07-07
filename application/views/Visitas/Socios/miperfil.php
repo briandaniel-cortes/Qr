@@ -1,3 +1,3 @@
 <center>
-<h1> Perfil</h1>
+<h1> Mi Perfil</h1>
 </center>
