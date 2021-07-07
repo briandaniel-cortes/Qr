@@ -194,6 +194,21 @@ class Socios extends CI_Controller
 		$this->load->view('Visitas/Socios/agregarpromocion');
 		$this->load->view('Componentes/Footer');
 	}
+	public function miperfil()
+	{
+		$id = $this->session->id;
+		$breadcrumb         = array(
+			"Inicio" => "/qrtour/public",
+			"Promociones" => "/qrtour/public",
+			"Agregar" => "/qrtour/public",
+		);
+		
+		$data['breadcrumb'] = $breadcrumb;
+		$data['socio'] = $this->Socio->perfil($id);
+		$this->load->view('Componentes/Headersocio', $data);
+		$this->load->view('Visitas/Socios/miperfil');
+		$this->load->view('Componentes/Footer');
+	}
 	public function registrarpromo()
 	{
 		$id = strip_tags($this->input->post('locale'));
