@@ -343,6 +343,14 @@ class Socios extends CI_Controller
 
 	public function contactanos()
 	{
-		$this->load->view('Visitas/municipios');
+		$breadcrumb = array(
+			"Inicio" => "/qrtour/public",
+			"Contactanos" => "/qrtour/public",
+		);
+		$data['breadcrumb'] = $breadcrumb;
+		$this->load->view('Componentes/Headersocio', $data);
+		$this->load->view('Componentes/contact');
+		$this->load->view('Componentes/estilos');
+		$this->load->view('Componentes/Footer');
 	}
 }

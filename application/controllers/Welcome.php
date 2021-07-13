@@ -228,6 +228,22 @@ class Welcome extends CI_Controller
 				);
 				$this->session->set_userdata($arraydata);
 				redirect('/Socios');
+			} elseif ($row->tipo == "admin") {
+				$arraydata = array(
+					'id'  => $row->id,
+					'nombre'  => $row->nombre,
+					'apellidopaterno'  => $row->apellidopaterno,
+					'apellidomaterno'  => $row->apellidomaterno,
+					'fechanacimiento'  => $row->fechanacimiento,
+					'telefono'  => $row->telefono,
+					'correo'  => $row->correo,
+					'contrasena'  => $row->contrasena,
+					'foto'  => $row->foto,
+					'tipo'  => $row->tipo,
+					'sexo'  => $row->sexo
+				);
+				$this->session->set_userdata($arraydata);
+				redirect('/Admon');
 			}
 		} else {
 			$breadcrumb         = array(
