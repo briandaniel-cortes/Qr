@@ -61,7 +61,7 @@
         background-attachment: fixed;
         width: 100%;
         position: relative;
-
+        background-size: cover;
     }
     .parallax {
         background-image: url("https://www.mexicodestinos.com/blog/wp-content/uploads/2015/05/Huejutla-Hidalgo.jpg");
@@ -269,15 +269,24 @@ color:white;
     .cambio {
       background-image: url("https://qrtourproyecto.000webhostapp.com/imagenes/local2.png");
       background-attachment: fixed;
+      
+      background-size: cover;
+      background-repeat: no-repeat;
     }
 
     .cambio2 {
       background-image: url("https://qrtourproyecto.000webhostapp.com/imagenes/fondos.png");
       background-attachment: fixed;
+      
+      background-size: cover;
+      background-repeat: no-repeat;
     }
     .cambio3 {
       background-image: url("https://qrtourproyecto.000webhostapp.com/imagenes/agregar.png");
       background-attachment: fixed;
+      background-repeat: no-repeat;
+      
+      background-size: cover;
     }
     .color {
       background-color: rgb(252, 232, 167)

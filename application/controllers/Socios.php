@@ -15,6 +15,7 @@ class Socios extends CI_Controller
 		$this->load->model('Local');
 		$this->load->library('session');
 		$this->load->helper(array('form', 'url'));
+		$this->load->library(array('form_validation'));
 		$this->load->library('ftp');
 	}
 
@@ -28,6 +29,140 @@ class Socios extends CI_Controller
 		$this->load->view('Componentes/Headersocio', $data);
 		$this->load->view('Visitas/usuario/InicioUsuario');
 		$this->load->view('Componentes/Footer');
+	}
+
+	public function get_Muncipio()
+	{
+		$idEstado = $this->input->post('idEstado');
+
+		$municipio = $this->Socio->getMunicipio($idEstado);
+
+		if (count($municipio) > 0) {
+			$pro_solect_box = '';
+			$pro_solect_box .= '<option value="">Selecciona municipio</option>';
+			foreach ($municipio as $dato) {
+				$pro_solect_box .= '<option value="' . $dato->id . '">' . $dato->municipio . '</option>';
+			}
+			echo json_encode($pro_solect_box);
+		}
+	}
+	public function agregarlocal()
+	{
+		$breadcrumb         = array(
+			"Inicio" => "/qrtour/public",
+			"Socios" => "/qrtour/public",
+		);
+		$datas['error']="";
+		$data['categoria']=$this->Socio->getTiposdelocal();
+		$data['socio']=$this->Socio->getUsuario();
+        $data['estado']=$this->Socio->getEstado();
+		$this->load->view('Componentes/Headersocio', $data);
+		$this->load->view('Visitas/Socios/Addlocal', $data);
+		$this->load->view('Componentes/Footer');
+	}
+	public function registrarLocal()
+	{
+		$config['upload_path'] = 'assets/img/';
+		$config['allowed_types'] = 'jpg|png';
+		$config['max_size'] = '2048';
+		$config['max_width'] = '2024';
+		$config['max_height'] = '2008';
+
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload("localfoto", "localfoto1")) {
+			$datas['error'] = $this->upload->display_errors();
+			$data['categoria']=$this->Socio->getTiposdelocal();
+			$data['socio']=$this->Socio->getUsuario();
+			$data['estado']=$this->Socio->getEstado();
+			$this->load->view('Componentes/Headersocio', $datas);
+			$this->load->view('Visitas/Socios/Addlocal');
+			$this->load->view('Componentes/Footer');
+			echo $d = "error";
+		} else {
+			$file_info = $this->upload->data();
+
+
+			$socio = $this->input->post('socio');
+			$localname = $this->input->post('localname');
+			$localphone = $this->input->post('localphone');
+			$localtipo = $this->input->post('localtipo');
+			$lunestimeopen = $this->input->post('lunestimeopen');
+			$lunestimeclose = $this->input->post('lunestimeclose');
+			$martestimeopen = $this->input->post('martestimeopen');
+			$martestimeclose = $this->input->post('martestimeclose');
+			$miercolestimeopen = $this->input->post('miercolestimeopen');
+			$miercolestimeclose = $this->input->post('miercolestimeclose');
+			$juevestimeopen = $this->input->post('juevestimeopen');
+			$juevestimeclose = $this->input->post('juevestimeclose');
+			$viernestimeopen = $this->input->post('viernestimeopen');
+			$viernestimeclose = $this->input->post('viernestimeclose');
+			$sabadotimeopen = $this->input->post('sabadotimeopen');
+			$sabadotimeclose = $this->input->post('sabadotimeclose');
+			$domingotimeopen = $this->input->post('domingotimeopen');
+			$domingotimeclose = $this->input->post('domingotimeclose');
+			$localEstado = $this->input->post('localEstado');
+			$localMunicipio = $this->input->post('localMunicipio');
+			$direccion = $this->input->post('direccion');
+			$localcorreo = $this->input->post('localcorreo');
+			$localfoto =  $file_info['file_name'];
+			$localdescripcion = $this->input->post('localdescripcion');
+			$localfoto1 = $file_info['file_name'];
+			$localfoto2 = $file_info['file_name'];
+			$localfoto3 = $file_info['file_name'];
+			$localface = $this->input->post('localface');
+			$google = $this->input->post('localgoogle');
+			$facebookvideo = $this->input->post('localvideo');
+			$facebooklink = $this->input->post('locallink');
+
+			
+
+
+			/*
+                $this->form_validation->set_rules($config);
+
+                if ($this->form_validation->run()==FALSE){
+                    $this->load->view('local/addlocal');
+                    $hola= "este es la falla";
+                    echo $hola;
+                }else{
+                    $hola2= "lo logramas";
+                    echo $hola2;
+*/
+			$municipio = $this->Socio->getMunicipioEstado($localEstado, $localMunicipio);
+			foreach ($municipio as $fila) {
+				$idEstadoMunicipio = $fila->id;
+			}
+
+
+			$data = array(
+				"socio" => $socio,
+				"estadomuniciolocal" => $idEstadoMunicipio,
+				"nombrelocal" => $localname,
+				"direccionlocal" => $direccion,
+				"telefonolocal" => $localphone,
+				"correolocal" => $localcorreo,
+				"tipolocal" => $localtipo,
+				"lunes" => $lunestimeopen . ' a ' . $lunestimeclose,
+				"martes" => $martestimeopen . ' a ' . $martestimeclose,
+				"miercoles" => $miercolestimeopen . ' a ' . $miercolestimeclose,
+				"jueves" => $juevestimeopen . ' a ' . $juevestimeclose,
+				"viernes" => $viernestimeopen . ' a ' . $viernestimeclose,
+				"sabado" => $sabadotimeopen . ' a ' . $sabadotimeclose,
+				"domingo" => $domingotimeopen . ' a ' . $domingotimeclose,
+				"foto" => $localfoto,
+				"Descripciondellocal" => $localdescripcion,
+				"foto2" => $localfoto1,
+				"foto3" => $localfoto2,
+				"foto4" => $localfoto3,
+				"facebook" => $localface,
+				"google" => $google,
+				"facebookvideo" => $facebookvideo,
+				"facebooklink" => $facebooklink,
+			);
+
+			$this->Socio->registrarLocal($data);
+		}
 	}
 	public function nosotros()
 	{
@@ -52,9 +187,9 @@ class Socios extends CI_Controller
 		$data['vermislocales'] = $this->Socio->vermislocales($id);
 		$this->load->view('Componentes/Headersocio', $data);
 		$this->load->view('Visitas/Socios/localvista');
-		$this->load->view('Visitas/Socios/comosubir');
 		$this->load->view('Componentes/Footer');
 	}
+
 	public function sesocio()
 	{
 		$breadcrumb         = array(
@@ -163,8 +298,8 @@ class Socios extends CI_Controller
 		$idpromo = strip_tags($this->input->post('idpromo'));
 		$promo = $this->Promociones->delete($idpromo);
 		if ($promo) {
-	
-			redirect('./Socios/promociones');	
+
+			redirect('./Socios/promociones');
 		} else {
 			$id = $this->session->id;
 			$breadcrumb         = array(
@@ -202,7 +337,7 @@ class Socios extends CI_Controller
 			"Promociones" => "/qrtour/public",
 			"Agregar" => "/qrtour/public",
 		);
-		
+
 		$data['breadcrumb'] = $breadcrumb;
 		$data['socio'] = $this->Socio->perfil($id);
 		$this->load->view('Componentes/Headersocio', $data);
@@ -335,11 +470,11 @@ class Socios extends CI_Controller
 	}
 
 	function logout()
-    {
+	{
 
-        $this->session->sess_destroy();
-        redirect('../');
-    }
+		$this->session->sess_destroy();
+		redirect('../');
+	}
 
 	public function contactanos()
 	{

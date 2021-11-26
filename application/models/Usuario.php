@@ -56,5 +56,23 @@ class Usuario extends CI_Model
         }
         return false;
     }
-    
+    public function UsuariosVista()
+    {
+        
+        $this->table22 = 'Usuarios_vista';
+        $query = $this->db->get($this->table22);
+
+        if($query->num_rows()>0){            
+           return $query;            
+       }else{
+           return false;
+       } 
+    }
+    public function delete($id)
+    {
+            
+            $this->db->where('id', $id);
+            $this->db->delete($this->table);
+        return false;
+    }
 }

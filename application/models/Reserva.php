@@ -1,16 +1,27 @@
 
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Admonmodel extends CI_Model
+class Reserva extends CI_Model
 {
     function __construct()
     {
         parent::__construct();
         $this->load->database();
-        $this->table = 'promociones';
+        $this->table = 'reserva';
         $this->id = 'id';
     }
-  
+    public function insert($data = array())
+    {
+        if (!empty($data)) {
+
+            // Insert member data 
+            $insert = $this->db->insert($this->table, $data);
+
+            // Return the status 
+            return $insert ? $this->db->insert_id() : false;
+        }
+        return false;
+    }
     public function update($id,$data = array())
     {
         if (!empty($data)) {
@@ -22,29 +33,27 @@ class Admonmodel extends CI_Model
     }
     public function delete($id)
     {
-            
             $this->db->where('id', $id);
             $this->db->delete($this->table);
         return false;
     }
-    public function Promociones()
+    public function tagsver($id)
     {
-        $query = $this->db->query("CALL mostrartodaslaspromociones()");
+        $query = $this->db->query("SELECT * FROM reserva WHERE reserva.`id`=$id");
         if($query->num_rows()>0){            
            return $query;            
        }else{
            return false;
        } 
     }
-    public function localesvista2()
+    public function Reservas()
     {
-        $this->table2 = 'localesvista2';
-        $query = $this->db->get($this->table2);
+        $query = $this->db->get($this->table);
+
         if($query->num_rows()>0){            
            return $query;            
        }else{
            return false;
        } 
     }
-    
 }

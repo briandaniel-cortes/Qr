@@ -3,44 +3,37 @@
     <center>
         <h1 class="text-dark">Tus Promociones </h1>
         <br><br>
-        <a href="<?php echo ruta; ?>/Admon/monumentosagregar" class="btn btn-info">Agregar</a>
-        <br><br><br>
-
         <div class="cambio2">
              <table class="table">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">id</th>
-                        <th scope="col">Titulo</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Codigo Qr</th>
+                        <th scope="col">id del local</th>
+                        <th scope="col">Tag</th>
                         <th scope="col"><center>Acciones</center></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if ($monumentos) : ?>
+                    <?php if ($tag) : ?>
                         <?php
-                        foreach ($monumentos->result() as $worker) {
+                        foreach ($tag->result() as $worker) {
                         ?>
                             <tr>
                                 <td><?= $worker->id ?></td>
-                                <td><?= $worker->titulo ?></td>
-                                <td><?= $worker->descripcion ?></td>
-                                <td><?= $worker->foto ?> </td>
-                                <td><?= $worker->codigo ?> </td>
+                                <td><?= $worker->idlocal ?></td>
+                                <td><?= $worker->tag ?> </td>
                                
                                
                                 <td>
                                     <h2>
                                         <center>
 
-                                            <form action="<?php echo ruta; ?>/Admon/Eliminarmonumentos" method="POST" id="for">
+                                            <form action="<?php echo ruta; ?>/Admon/Eliminartag" method="POST" id="for">
                                                 <input type="hidden" name="idpromo" value="<?= $worker->id ?>">
 
                                             </form>
                                             <button type="button" class="btn btn-danger" onclick="op()">Eliminar</button>
-                                            <form action="<?php echo ruta; ?>/Admon/monumentoseditar" method="POST">
+                                            <form action="<?php echo ruta; ?>/Admon/editartag" method="POST">
                                                 <input type="hidden" name="localid" value="<?= $worker->id ?>">
 
                                                 <button type="submit" class="btn btn-success">Actualizar</button>

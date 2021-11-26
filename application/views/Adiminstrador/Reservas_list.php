@@ -3,44 +3,41 @@
     <center>
         <h1 class="text-dark">Tus Promociones </h1>
         <br><br>
-        <a href="<?php echo ruta; ?>/Admon/monumentosagregar" class="btn btn-info">Agregar</a>
-        <br><br><br>
-
         <div class="cambio2">
              <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">Titulo</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Foto</th>
-                        <th scope="col">Codigo Qr</th>
+                    <th scope="col">id</th>
+                        <th scope="col">id Usuario</th>
+                        <th scope="col">id local</th>
+                        <th scope="col">Tipo de local</th>
+                        <th scope="col">Fecha</th>
                         <th scope="col"><center>Acciones</center></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if ($monumentos) : ?>
+                    <?php if ($reservas) : ?>
                         <?php
-                        foreach ($monumentos->result() as $worker) {
+                        foreach ($reservas->result() as $worker) {
                         ?>
                             <tr>
                                 <td><?= $worker->id ?></td>
-                                <td><?= $worker->titulo ?></td>
-                                <td><?= $worker->descripcion ?></td>
-                                <td><?= $worker->foto ?> </td>
-                                <td><?= $worker->codigo ?> </td>
+                                <td><?= $worker->usuario ?></td>
+                                <td><?= $worker->locale ?> </td>
+                                <td><?= $worker->TipoLocal ?></td>
+                                <td><?= $worker->Fecha ?> </td>
                                
                                
                                 <td>
                                     <h2>
                                         <center>
 
-                                            <form action="<?php echo ruta; ?>/Admon/Eliminarmonumentos" method="POST" id="for">
+                                            <form action="<?php echo ruta; ?>/Admon/Eliminarreserva" method="POST" id="for">
                                                 <input type="hidden" name="idpromo" value="<?= $worker->id ?>">
 
                                             </form>
                                             <button type="button" class="btn btn-danger" onclick="op()">Eliminar</button>
-                                            <form action="<?php echo ruta; ?>/Admon/monumentoseditar" method="POST">
+                                            <form action="<?php echo ruta; ?>/Admon/reservaeditar" method="POST">
                                                 <input type="hidden" name="localid" value="<?= $worker->id ?>">
 
                                                 <button type="submit" class="btn btn-success">Actualizar</button>

@@ -33,9 +33,6 @@
                     <a class="nav-link" href="<?php echo ruta; ?>Admon/usuarios">Usuarios <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?php echo ruta; ?>Admon/socios">socios<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
                     <a class="nav-link" href="<?php echo ruta; ?>Admon/Slider">Slider<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
@@ -43,6 +40,9 @@
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="<?php echo ruta; ?>Admon/tags">tags General<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?php echo ruta; ?>Admon/reserva">Reservas<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
            

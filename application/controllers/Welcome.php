@@ -38,6 +38,8 @@ class Welcome extends CI_Controller
 		$this->load->view('Componentes/Header', $data);
 		$this->load->view('Visitas/nosotros');
 		$this->load->view('Componentes/Footer');
+		log_message('error', 'Some variable did not contain a value.'); 
+		log_message('info', 'The purpose of some variable is to provide some value.');
 	}
 	public function socio()
 	{
@@ -177,6 +179,8 @@ class Welcome extends CI_Controller
 	}
 	public function milogin()
 	{
+		
+	
 		$breadcrumb         = array(
 			"Inicio" => "/qrtour/public",
 			"Login" => "/qrtour/public",
@@ -260,5 +264,10 @@ class Welcome extends CI_Controller
 	public function contactanos()
 	{
 		$this->load->view('Visitas/municipios');
+	}
+	public function Cerrarsesion()
+	{
+		$this->session->sess_destroy();
+        redirect('/Welcome');
 	}
 }
